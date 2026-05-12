@@ -1,0 +1,8 @@
+services:
+  orderapi:
+    build: .
+    container_name: orderapi-container
+    ports:
+      - "5000:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
