@@ -2,7 +2,7 @@
 
 namespace OrderApi.DTOs
 {
-    public class CreateOrderDTO
+    public class CreateOrderDto
     {
         [Required]
         public string CustomerName { get; set; } = string.Empty;
