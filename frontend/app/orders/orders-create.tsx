@@ -11,7 +11,7 @@ export default function OrdersCreate() {
 
   const mutation = useMutation({
     mutationFn: async (newOrder: { customerName: string; value: number }) => {
-      const response = await fetch("http://localhost:5000/api/Orders", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newOrder),

@@ -15,7 +15,7 @@ export default function OrdersDetails() {
     const { data: order, isLoading, isError } = useQuery<Order>({
         queryKey: ["order", id],
         queryFn: async () => {
-            const response = await fetch(`http://localhost:5000/api/Orders/${id}`);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Orders/${id}`);
             if (!response.ok) throw new Error("Pedido não encontrado");
             return response.json();
         },

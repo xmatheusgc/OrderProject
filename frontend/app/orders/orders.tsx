@@ -13,7 +13,7 @@ export default function Orders() {
   const { data: orders, isLoading, isError } = useQuery<Order[]>({
     queryKey: ["orders"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:5000/api/Orders");
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/Orders`);
       if (!response.ok) throw new Error("Erro ao buscar pedidos");
       return response.json();
     },

@@ -1,8 +1,21 @@
-.vs/
-bin/
-obj/
+# .env files
+.env
+.env.*
+!.env.example
+
+# .NET / Backend
+backend/bin/
+backend/obj/
+backend/.vs/
 *.user
 *.suo
+*.sln.docstates
+
+# Database
 *.db
 *.db-shm
 *.db-wal
+
+# OS files
+.DS_Store
+Thumbs.db
