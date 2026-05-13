@@ -16,7 +16,29 @@ export default function OrdersCreate() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newOrder),
       });
-      if (!response.ok) throw new Error("Erro ao criar pedido");
+
+      if (!response.ok) {
+        let errorMessage = "Erro ao criar pedido";
+        try {
+          const errorData = await response.json();
+          if (errorData.errors) {
+            const errorEntries = Object.values(errorData.errors);
+            if (errorEntries.length > 0) {
+              const messages = errorEntries[0] as string[];
+              errorMessage = messages[0];
+            }
+          } else {
+            errorMessage = errorData.error || errorData.Error || errorData.title || errorMessage;
+          }
+        } catch (e) {
+          try {
+            const textError = await response.text();
+            if (textError) errorMessage = textError;
+          } catch (textErr) {}
+        }
+        throw new Error(errorMessage);
+      }
+
       return response.json();
     },
     onSuccess: () => {
@@ -88,7 +110,7 @@ export default function OrdersCreate() {
           {mutation.isError && (
             <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/20 flex items-center gap-3 text-destructive text-sm font-medium animate-in fade-in slide-in-from-top-2">
               <AlertCircle size={18} />
-              <p>Ocorreu um erro ao salvar o pedido. Tente novamente.</p>
+              <p>{mutation.error.message}</p>
             </div>
           )}
 

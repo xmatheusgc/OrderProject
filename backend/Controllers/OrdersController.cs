@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using OrderApi.DTOs;
 using OrderApi.Services;
 
@@ -19,6 +19,7 @@ namespace OrderApi.Controllers
         public async Task<ActionResult<List<OrderResponseDto>>> GetAll()
         {
             var orders = await _service.GetAllAsync();
+
             return Ok(orders);
         }
 
